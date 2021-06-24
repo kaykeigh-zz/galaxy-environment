@@ -10,23 +10,21 @@ import pandas as pd
 
 def createDataFrame(df, estimator = ['knn', 'fixed'], kn=[1, 7, 10, 50], radius=[0.25,1,2,5,8,10]):
     
- if estimator == 'knn': 
-    df_environment = pd.DataFrame()
-    df_environment = (df_environment
-               .assign(id = np.repeat(0,len(df)), 
-                      ra = np.repeat(0,len(df)),
-                      dec = np.repeat(0,len(df)),
-                      z = np.repeat(0,len(df))))
+    if estimator == 'knn': 
+        df_environment = pd.DataFrame()
+        df_environment = (df_environment
+                   .assign(id = np.repeat(0,len(df)), 
+                          ra = np.repeat(0,len(df)),
+                          dec = np.repeat(0,len(df)),
+                          z = np.repeat(0,len(df))))
     
-    for k in range(0, len(kn)):
-         df_environment["sigma_k" + str(kn[k])] = np.repeat(0,len(df))
-            
-    df_environment = (df_environment
-               .assign(
-                      n_neighbours = np.repeat(0,len(df)), 
-                      neighbours_ids = np.repeat(0,len(df))))
+        for k in range(0, len(kn)):
+             df_environment["sigma_k" + str(kn[k])] = np.repeat(0,len(df))
 
- elif estimator == 'fixed':
+        df_environment = (df_environment
+                    .assign(n_neighbours = np.repeat(0,len(df))))
+
+    elif estimator == 'fixed':
         df_environment = pd.DataFrame()
         df_environment = (df_environment
                 .assign(id = np.repeat(0,len(df)), 
@@ -38,18 +36,49 @@ def createDataFrame(df, estimator = ['knn', 'fixed'], kn=[1, 7, 10, 50], radius=
             df_environment["sigma_r" + str(radius[k])] = np.repeat(0,len(df))
                 
         df_environment = (df_environment
-                .assign(
-                        n_neighbours = np.repeat(0,len(df)), 
-                        neighbours_ids = np.repeat(0,len(df))))
+                .assign(n_neighbours = np.repeat(0,len(df))))
 
     
- return df_environment
+    return df_environment
 
-def knn(ra, dec, zs, delta_z, ids, kn=[1, 7, 10, 50]):
+def knn(df, ra_column='RA', dec_column='DEC' , degrees = True, z_column ='z', delta_z=None, kn=[1, 7, 10, 50]):
+    ''' 
+    For each galaxy in the sample, we choose values for k, which is the number of neighbors around a range of z. 
+    The distance to each k neighbor is calculated and the surface density of galaxies in that radius is estimated. 
+    
+    Parameters:
+    df = Pandas dataframe where each line represents a galaxy with its respective coordinates (RA and Dec) and redshift (z);
+    
+    ra_column = Column name in the dataframe containing the right ascension coordinate in degrees;
+    
+    dec_column = Column name in the dataframe containing the declination coordinate in degrees;
+    
+    degrees = True by default. If your coordinates are in radians, pass the value False for the parameter;
+    
+    z_column = Column name in the dataframe containing the redshift;
+    
+    delta_z = None by default, it will be taken the standard deviation of z column. If you prefer, you can pass a float for this parameter;
+    
+    kn = List containing k values for calculating distances to k-neighbors.
+     
+    ''' 
+ 
+    if degrees: 
+        ra = df[ra_column].values * (math.pi/180)
+        dec = df[dec_column].values * (math.pi/180)
+    else: 
+        ra = df[ra_column].values
+        dec = df[dec_column].values 
+        
+    zs = df[z_column].values
+    
+    if delta_z is None:
+        delta_z = np.std(zs).round(3)
     
     df_environment = createDataFrame(ra, estimator = 'knn', kn = kn )
     distd = distances.cosmological_distances(zs)
     dens_knn=np.tile(0.0,len(kn))
+  
 
     if len(ra) > 10000:
         print('Hmm, I just checked here and it seems your sample is larger than 10k rows... \n')
@@ -92,7 +121,37 @@ def knn(ra, dec, zs, delta_z, ids, kn=[1, 7, 10, 50]):
 
     return df_environment
 
-def fixedApertures(ra, dec, zs, delta_z, ids, radius=[0.25,1,2,5,8,10]):
+def fixedApertures(df, ra_column='RA', dec_column='DEC' , degrees = True, z_column ='z', delta_z=None, radius=[0.25,1,2,5,8,10]):
+    ''' 
+    For each galaxy in the sample, we choose values for k, which is the number of neighbors around a range of z. 
+    The distance to each k neighbor is calculated and the surface density of galaxies in that radius is estimated. 
+    
+    Parameters:
+    df = Pandas dataframe where each line represents a galaxy with its respective coordinates (RA and Dec) and redshift (z);
+    
+    ra_column = Column name in the dataframe containing the right ascension coordinate in degrees;
+    
+    dec_column = Column name in the dataframe containing the declination coordinate in degrees;
+    
+    degrees = True by default. If your coordinates are in radians, pass the value False for the parameter;
+    
+    z_column = Column name in the dataframe containing the redshift;
+    
+    delta_z = None by default, it will be taken the standard deviation of z column. If you prefer, you can pass a float for this parameter;
+    
+    radius = List containing the projected radius values in Mpc.
+    '''
+    
+    if degrees: 
+        ra = df[ra_column].values * (math.pi/180)
+        dec = df[dec_column].values * (math.pi/180)
+    else: 
+        ra = df[ra_column].values
+        dec = df[dec_column].values 
+        
+    zs = df[z_column].values
+    if delta_z is None:
+        delta_z = np.std(zs).round(3)
     
     df_environment = createDataFrame(ra, estimator = 'fixed', radius = radius)
     distd = distances.cosmological_distances(zs)
