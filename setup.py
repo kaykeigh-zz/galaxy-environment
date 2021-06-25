@@ -4,7 +4,7 @@ from setuptools import setup
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 setup(
     name="galaxy_environment",
     version=__version__,
@@ -17,8 +17,7 @@ setup(
     packages=["galaxy_environment"],
     install_requires=[
         "numpy",
-        "pandas",
-        "math",
+        "pandas"
     ],
     license="Apache License 2.0",
     classifiers=[
