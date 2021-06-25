@@ -20,6 +20,7 @@ from galaxy_environment import environment
 ```
 
 ### Any doubts about this package, please write to kayleighmeneghini@gmail.com
+-------------------------------------------------------------------------------------------------------------------
 
 ## Introduction 
 How much the environment affects galaxies is still part of the unknown, as some results are discrepant depending on the sample selection, according to Lai
