@@ -13,7 +13,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Kayleigh Meneghini",
     author_email="kayleighmeneghini@gmail.com",
-    url="https://github.com/kayleighm/galaxy-environment",
+    url="https://github.com/kaykeigh/galaxy-environment",
     packages=["galaxy_environment"],
     install_requires=[
         "numpy",
