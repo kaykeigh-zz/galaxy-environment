@@ -59,7 +59,7 @@ Monthly Notices of the Royal Astronomical Society, 2019, vol. 489, p.
 * Muldrew et al. (2012), Measures of galaxy environment – I. What is ‘environment’?,
 Monthly Notices of the Royal Astronomical Society, 2012, vol. 419, p. 2670
 
-* Wright E., A Cosmology Calculator for the World Wide Web, Publications of the Astro-
-nomical Society of the Pacific, 2006, vol. 118, p. 1711–1715
+* Wright E., A Cosmology Calculator for the World Wide Web, 
+Publications of the Astronomical Society of the Pacific, 2006, vol. 118, p. 1711–1715
 
 
