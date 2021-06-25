@@ -1,11 +1,13 @@
 import numpy as np
 import math 
 
-def cosmological_distances(z):
+def cosmological_distances(z, H0=70, WM=0.315):
+    
+    ##########################################################
+    ################## Author: Wright E. (2006) ##############
+    ##########################################################
     
     # initialize constants
-    H0 = 70
-    WM = 0.315
     WV = 1.0 - WM - 0.4165/(H0*H0)  # Omega(vacuum) or lambda
 
     WR = 0.        # Omega(radiation)
