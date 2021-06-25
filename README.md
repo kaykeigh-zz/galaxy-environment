@@ -9,7 +9,7 @@ This package is available on PyPi.
 For more details, please check this [tutorial](https://github.com/kaykeigh/galaxy-environment/blob/master/tutorial/Tutorial.ipynb)
 
 ```
-# instalation
+# installation
 pip install galaxy-environment
 
 # import 
