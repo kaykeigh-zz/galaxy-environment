@@ -6,7 +6,7 @@
 
 This package is available on [PyPi](https://pypi.org/project/galaxy-environment/0.0.3/).
 
-For more details, please check this [tutorial](https://github.com/kaykeigh/galaxy-environment/blob/master/tutorial/Tutorial.ipynb)
+For more details, please check this [tutorial](https://github.com/kaykeigh/galaxy-environment/blob/master/tutorial/Tutorial.ipynb), using [S-PLUS](https://arxiv.org/pdf/1907.01567.pdf) data.
 
 
 ```
@@ -51,8 +51,15 @@ surveys, Monthly Notices of the Royal Astronomical Society, 2015, vol. 451, p. 6
 * Lai et al. (2016), CAN WE DETECT THE COLOR–DENSITY RELATION WITH
 PHOTOMETRIC REDSHIFTS?, The Astrophysical Journal, 2016, vol. 825, p. 40
 
+* Mendes de Oliveira et al. (2019), The Southern Photometric Local Universe Survey
+(S-PLUS): improved SEDs, morphologies and redshifts with 12 optical filters, 
+Monthly Notices of the Royal Astronomical Society, 2019, vol. 489, p.
+241–267
+
 * Muldrew et al. (2012), Measures of galaxy environment – I. What is ‘environment’?,
 Monthly Notices of the Royal Astronomical Society, 2012, vol. 419, p. 2670
 
 * Wright E., A Cosmology Calculator for the World Wide Web, Publications of the Astro-
 nomical Society of the Pacific, 2006, vol. 118, p. 1711–1715
+
+
