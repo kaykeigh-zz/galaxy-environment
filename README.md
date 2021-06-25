@@ -4,7 +4,7 @@
 
 ## How to use
 
-This package is available on PyPi.
+This package is available on [PyPi](https://pypi.org/project/galaxy-environment/0.0.2/).
 
 For more details, please check this [tutorial](https://github.com/kaykeigh/galaxy-environment/blob/master/tutorial/Tutorial.ipynb)
 
