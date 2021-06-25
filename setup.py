@@ -8,7 +8,7 @@ __version__ = "0.0.2"
 setup(
     name="galaxy_environment",
     version=__version__,
-    description="Measuring Galaxy Environment",
+    description="Measuring Galaxy Environments",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Kayleigh Meneghini",
