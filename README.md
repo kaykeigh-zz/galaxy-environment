@@ -1,5 +1,8 @@
 # Building an environmental catalog for galaxies
 
+**Author**: Kayleigh Meneghini | **Email**: kayleighmeneghini@gmail.com
+
+## Introduction 
 How much the environment affects galaxies is still part of the unknown, as some results are discrepant depending on the sample selection, according to Lai
 et al. (2016), such as the chosen magnitude or velocity dispersion limit for sample.
 
