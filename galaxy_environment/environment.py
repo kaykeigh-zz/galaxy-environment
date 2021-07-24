@@ -96,7 +96,8 @@ def knn(df, id_column = 'ID', ra_column='RA', dec_column='DEC' , degrees = True,
     
      
     ''' 
- 
+    
+    # convert degrees into radians
     if degrees == True: 
         ra = df[ra_column].values * (math.pi/180)
         dec = df[dec_column].values * (math.pi/180)
@@ -111,6 +112,8 @@ def knn(df, id_column = 'ID', ra_column='RA', dec_column='DEC' , degrees = True,
         delta_z = np.std(zs).round(3)
     
     df_environment = createDataFrame(ra, estimator = 'knn', kn = kn )
+    
+    # calculate cosmological distance for each redshift, it returns angular diameter distance 
     distd = distances.cosmological_distances(zs)
     dens_knn=np.tile(0.0,len(kn))
   
@@ -130,7 +133,7 @@ def knn(df, id_column = 'ID', ra_column='RA', dec_column='DEC' , degrees = True,
         dec1 = dec[i]
         dist = distd[i]
 
-        # pegando o subgrupo de galáxias nesse intervalo
+        # taking the subgroup of galaxies in this range
         ra2 = ra[np.logical_and(zs > z1, zs <= z2)]
         dec2 = dec[np.logical_and(zs > z1, zs <= z2)]
 
@@ -141,6 +144,7 @@ def knn(df, id_column = 'ID', ra_column='RA', dec_column='DEC' , degrees = True,
         df_environment['dec'].iloc[i] = dec1
         df_environment['z'].iloc[i] = z
 
+        # calculate the orthodromic distance
         d = distances.great_circle_distance(ra1, dec1, ra2, dec2)*dist
         
         # distance to k-neighbours
@@ -218,7 +222,7 @@ def fixedApertures(df, id_column = 'ID',  ra_column='RA', dec_column='DEC' , deg
         print('It will be ready in less than a minute... You are lucky!')
 
     for i in range(0, len(ra)):
-    #definindo intervalo de redshift
+        # define redshift's range
         z = zs[i]
         z1 = z-2*delta_z
         z2 = z+2*delta_z
@@ -226,7 +230,7 @@ def fixedApertures(df, id_column = 'ID',  ra_column='RA', dec_column='DEC' , deg
         dec1 = dec[i]
         dist = distd[i]
 
-        # pegando o subgrupo de galáxias nesse intervalo
+        # taking the subgroup of galaxies in this range
         ra2 = ra[np.logical_and(zs > z1, zs <= z2)]
         dec2 = dec[np.logical_and(zs > z1, zs <= z2)]
 
