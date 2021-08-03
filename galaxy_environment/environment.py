@@ -60,7 +60,7 @@ def createDataFrame(df, estimator = ['knn', 'fixed'], kn=[1, 7, 10, 50], radius=
     
     return df_environment
 
-def knn(df, id_column = 'ID', ra_column='RA', dec_column='DEC' , degrees = True, z_column ='z', delta_z=None, kn=[1, 7, 10, 50]):
+def knn(df, method = 'simple', id_column = 'ID', ra_column='RA', dec_column='DEC' , degrees = True, z_column ='z', delta_z=None, kn=[1, 7, 10, 50]):
     ''' 
     For each galaxy in the sample, we choose values for k, 
     which is the number of neighbors around a range of z. 
@@ -72,6 +72,8 @@ def knn(df, id_column = 'ID', ra_column='RA', dec_column='DEC' , degrees = True,
     -----------
     df = Pandas dataframe
     Each line represents a galaxy with its respective coordinates (RA and Dec) and redshift (z);
+    
+    method = simple | bayesian;
     
     ra_column = str
     Column name in the dataframe containing the right ascension coordinate in degrees;
@@ -92,12 +94,9 @@ def knn(df, id_column = 'ID', ra_column='RA', dec_column='DEC' , degrees = True,
     
     kn = list
     List containing k values for calculating distances to k-neighbors.
-    
-    
      
     ''' 
-    
-    # convert degrees into radians
+ 
     if degrees == True: 
         ra = df[ra_column].values * (math.pi/180)
         dec = df[dec_column].values * (math.pi/180)
@@ -112,8 +111,6 @@ def knn(df, id_column = 'ID', ra_column='RA', dec_column='DEC' , degrees = True,
         delta_z = np.std(zs).round(3)
     
     df_environment = createDataFrame(ra, estimator = 'knn', kn = kn )
-    
-    # calculate cosmological distance for each redshift, it returns angular diameter distance 
     distd = distances.cosmological_distances(zs)
     dens_knn=np.tile(0.0,len(kn))
   
@@ -133,7 +130,7 @@ def knn(df, id_column = 'ID', ra_column='RA', dec_column='DEC' , degrees = True,
         dec1 = dec[i]
         dist = distd[i]
 
-        # taking the subgroup of galaxies in this range
+        # pegando o subgrupo de galáxias nesse intervalo
         ra2 = ra[np.logical_and(zs > z1, zs <= z2)]
         dec2 = dec[np.logical_and(zs > z1, zs <= z2)]
 
@@ -144,7 +141,6 @@ def knn(df, id_column = 'ID', ra_column='RA', dec_column='DEC' , degrees = True,
         df_environment['dec'].iloc[i] = dec1
         df_environment['z'].iloc[i] = z
 
-        # calculate the orthodromic distance
         d = distances.great_circle_distance(ra1, dec1, ra2, dec2)*dist
         
         # distance to k-neighbours
@@ -152,14 +148,27 @@ def knn(df, id_column = 'ID', ra_column='RA', dec_column='DEC' , degrees = True,
 
         #density
         for k in range(0, len(kn)):
-            try: 
-                dens_knn[k] = kn[k]/(math.pi*d[indice[kn[k]]]**2)
+            
+            if method == 'simple':
+                try: 
+                    dens_knn[k] = kn[k]/(math.pi*d[indice[kn[k]]]**2)
 
-            except:
-                dens_knn[k]=0
+                except:
+                    dens_knn[k]=0
+            
+            # in beta
+            elif method == 'bayesian':
+                try:
+                    d_sum=0
+                    for j in range(1, kn[k]+1):
+                        d_sum = d_sum + (d[indice[j]])
+                        
+                    dens_knn[k] = (kn[k] * (kn[k] + 1))/2*np.pi/d_sum
+                    
+                except:
+                    dens_knn[k]=0
 
             df_environment["sigma_k" + str(kn[k])].iloc[i] = dens_knn[k]
- 
 
     return df_environment
 
@@ -222,7 +231,7 @@ def fixedApertures(df, id_column = 'ID',  ra_column='RA', dec_column='DEC' , deg
         print('It will be ready in less than a minute... You are lucky!')
 
     for i in range(0, len(ra)):
-        # define redshift's range
+    #definindo intervalo de redshift
         z = zs[i]
         z1 = z-2*delta_z
         z2 = z+2*delta_z
@@ -230,7 +239,7 @@ def fixedApertures(df, id_column = 'ID',  ra_column='RA', dec_column='DEC' , deg
         dec1 = dec[i]
         dist = distd[i]
 
-        # taking the subgroup of galaxies in this range
+        # pegando o subgrupo de galáxias nesse intervalo
         ra2 = ra[np.logical_and(zs > z1, zs <= z2)]
         dec2 = dec[np.logical_and(zs > z1, zs <= z2)]
 
