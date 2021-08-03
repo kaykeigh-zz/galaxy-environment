@@ -4,7 +4,7 @@ from setuptools import setup
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-__version__ = "0.0.2"
+__version__ = "1.0.1"
 setup(
     name="galaxy_environment",
     version=__version__,
