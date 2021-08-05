@@ -23,12 +23,9 @@ from galaxy_environment import environment
 -------------------------------------------------------------------------------------------------------------------
 
 ## Introduction 
-How much the environment affects galaxies is still part of the unknown, as some results are discrepant depending on the sample selection, according to Lai
-et al. (2016), such as the chosen magnitude or velocity dispersion limit for sample.
-
-Furthermore, the very definition of environment makes this type of study not trivial, after all *how to define the environment*? 
-We can consider the local environment, such as the associated with a central galaxy and its satellites, or on larger scales such as those associated
-with groups and clusters. 
+How much the environment affects galaxies is still part of the unknown, as some results are discrepant depending on the sample selection. 
+Furthermore, the very definition of environment makes this type of study not trivial, after all *how to define the environment?* 
+We can consider the local environment, such as the one associated with a central galaxy and its satellites, or on larger scales such as those associated with groups and clusters. 
 
 According to Muldrew et al. (2012), there are two wide methods used to define the galactic environment, these are: **Nearest Neighbors and Fixed Apertures**.
 
