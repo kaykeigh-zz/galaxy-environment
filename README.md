@@ -28,7 +28,7 @@ et al. (2016), such as the chosen magnitude or velocity dispersion limit for sam
 
 Furthermore, the very definition of environment makes this type of study not trivial, after all *how to define the environment*? 
 We can consider the local environment, such as the associated with a central galaxy and its satellites, or on larger scales such as those associated
-to groups and clusters. 
+with groups and clusters. 
 
 According to Muldrew et al. (2012), there are two wide methods used to define the galactic environment, these are: **Nearest Neighbors and Fixed Apertures**.
 
