@@ -23,9 +23,7 @@ from galaxy_environment import environment
 -------------------------------------------------------------------------------------------------------------------
 
 ## Introduction 
-How much the environment affects galaxies is still part of the unknown, as some results are discrepant depending on the sample selection. 
-Furthermore, the very definition of environment makes this type of study not trivial, after all *how to define the environment?* 
-We can consider the local environment, such as the one associated with a central galaxy and its satellites, or on larger scales such as those associated with groups and clusters. 
+The environment has a decisive role in how galaxies evolve. We observed a strong correlation between galaxy properties such as color, morphology and their environment. However, the definition of environment makes this type of study non-trivial, after all, we can consider the local environment, as the association of a central galaxy and its satellites, or on larger scales, groups and clusters of galaxies.
 
 There are two wide methods used to define the galactic environment, these are: **Nearest Neighbors and Fixed Apertures**.
 
