@@ -40,3 +40,5 @@ For each galaxy in the sample, values for k are chosen, this being the number of
 This method, unlike the previous one, defines a scale for the environment around a fixed area or volume for each galaxy. 
 So, the more galaxies within that area or volume, the denser the environment. 
 
+## Method 3: Bayesian density estimator
+An alternative method proposed by [Ivezic et. al (2005)](https://iopscience.iop.org/article/10.1086/427392/pdf), considering distances to *all* K neighbors instead of only the distance to the K-th nearest neighbor
